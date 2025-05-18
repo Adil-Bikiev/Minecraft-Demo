@@ -7,6 +7,8 @@ from ursina.prefabs.first_person_controller import FirstPersonController
 app = Ursina()
 
 player = FirstPersonController()
+player.cursor.scale = 0.02  # Уменьшаем ромб-прицел
+
 Sky()
 
 boxes = []
@@ -16,7 +18,7 @@ for i in range(20):
             color=color.white,
             model='cube',
             position=(j, 0, i),
-            texture='white_cube',  # Используем встроенную текстуру
+            texture='white_cube',
             parent=scene,
             origin_y=0.5
         )
