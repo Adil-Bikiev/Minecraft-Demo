@@ -12,8 +12,9 @@ player.cursor.scale = False
 player.cursor.color = color.pink  
 
 Sky()
+
 bs = []
-# Генерация земли
+
 for i in range(20):
     for j in range(20):
         b = Button(
@@ -24,19 +25,16 @@ for i in range(20):
             origin_y=0.5,
             color=color.white  
         )
-    b.hovered_color = Vec4(0.7, 0.7, 0.7, 1)
-    b.pressed_color = Vec4(0.5, 0.5, 0.5, 1)
+        b.hovered_color = Vec4(0.7, 0.7, 0.7, 1)
+        b.pressed_color = Vec4(0.5, 0.5, 0.5, 1)
+        bs.append(b)
 
 def input(key):
     global bs
     for b in bs[:]:
         if b.hovered:
             if key == 'left mouse down':
-                if mouse.normal is None:
-                    print('No valid mouse.normal, placing above')
-                    offset = Vec3(0,1,0)
-                else:
-                    offset = mouse.normal
+                offset = mouse.normal if mouse.normal else Vec3(0,1,0)
                 new = Button(
                     model='cube',
                     position=b.position + offset,
@@ -45,11 +43,11 @@ def input(key):
                     parent=scene,
                     origin_y=0.5
                 )
+                new.hovered_color = Vec4(0.7, 0.7, 0.7, 1)
+                new.pressed_color = Vec4(0.5, 0.5, 0.5, 1)
                 bs.append(new)
             if key == 'right mouse down':
                 bs.remove(b)
                 destroy(b)
-
-
 
 app.run()
