@@ -1,5 +1,5 @@
 from panda3d.core import loadPrcFileData
-loadPrcFileData('', 'gl-version 2 1')  # Совместимость с GLSL на macOS
+loadPrcFileData('', 'gl-version 2 1')
 
 from ursina import *
 from ursina.prefabs.first_person_controller import FirstPersonController
@@ -7,14 +7,17 @@ from ursina.prefabs.first_person_controller import FirstPersonController
 app = Ursina()
 
 player = FirstPersonController()
-player.cursor.scale = 0.02  # Уменьшаем ромб-прицел
+
+# Настройка прицела (ромба)
+player.cursor.scale = 0.01       # Уменьшаем размер
+player.cursor.color = color.black66  # Менее навязчивый цвет
 
 Sky()
 
-boxes = []
+# Генерация земли
 for i in range(20):
     for j in range(20):
-        box = Button(
+        Button(
             color=color.white,
             model='cube',
             position=(j, 0, i),
@@ -22,6 +25,5 @@ for i in range(20):
             parent=scene,
             origin_y=0.5
         )
-        boxes.append(box)
 
 app.run()
