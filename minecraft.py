@@ -22,11 +22,10 @@ for i in range(20):
             texture='grass.png',
             parent=scene,
             origin_y=0.5,
-            color=color.white  # чтобы текстура не была затемнена изначально
+            color=color.white  
         )
-        # При наведении делаем цвет чуть темнее (умножаем на 0.7)
-        b.hovered_color = color.rgb(70, 70, 70)  
-        # При отпускании мыши (нажатии) цвет можно оставить таким же, как при наведении
-        b.pressed_color = color.rgb(50, 50, 50)  
+    b.hovered_color = Vec4(0.7, 0.7, 0.7, 1)
+    b.pressed_color = Vec4(0.5, 0.5, 0.5, 1)
+
 
 app.run()
