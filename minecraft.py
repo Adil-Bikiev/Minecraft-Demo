@@ -12,7 +12,7 @@ player.cursor.scale = False
 player.cursor.color = color.pink  
 
 Sky()
-
+bs = []
 # Генерация земли
 for i in range(20):
     for j in range(20):
@@ -27,5 +27,21 @@ for i in range(20):
     b.hovered_color = Vec4(0.7, 0.7, 0.7, 1)
     b.pressed_color = Vec4(0.5, 0.5, 0.5, 1)
 
+def input(key):
+    for b in bs:
+        if b.hovered:
+            if key == 'left mouse down':
+                new = Button(
+                    model='cube',
+                    position=b.position + mouse.normal,
+                    color=color.white, 
+                    texture='grass.png',
+                    parent=scene,
+                    origin_y=0.5
+                )
+                bs.append(new)
+            if key == 'right mouse down':
+                bs.remove(b)
+                destroy(b)
 
 app.run()
