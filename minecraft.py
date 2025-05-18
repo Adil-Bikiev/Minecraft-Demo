@@ -8,12 +8,19 @@ app = Ursina()
 
 player = FirstPersonController()
 
-# Настраиваем курсор через один кадр после создания
-invoke(lambda: setattr(player.cursor, 'scale', 0.01), delay=0)
-invoke(lambda: setattr(player.cursor, 'color', color.black66), delay=0)
-
 Sky()
 
+# Флаг, чтобы изменить курсор только один раз
+cursor_initialized = False
+
+def update():
+    global cursor_initialized
+    if not cursor_initialized and hasattr(player, 'cursor'):
+        player.cursor.scale = 0.01
+        player.cursor.color = color.black66
+        cursor_initialized = True  # Не повторять
+
+# Генерация земли
 for i in range(20):
     for j in range(20):
         Button(
