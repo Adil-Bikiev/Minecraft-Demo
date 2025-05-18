@@ -8,13 +8,12 @@ app = Ursina()
 
 player = FirstPersonController()
 
-# Настройка прицела (ромба)
-player.cursor.scale = 0.01       # Уменьшаем размер
-player.cursor.color = color.black66  # Менее навязчивый цвет
+# Настраиваем курсор через один кадр после создания
+invoke(lambda: setattr(player.cursor, 'scale', 0.01), delay=0)
+invoke(lambda: setattr(player.cursor, 'color', color.black66), delay=0)
 
 Sky()
 
-# Генерация земли
 for i in range(20):
     for j in range(20):
         Button(
