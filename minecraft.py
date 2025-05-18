@@ -28,12 +28,18 @@ for i in range(20):
     b.pressed_color = Vec4(0.5, 0.5, 0.5, 1)
 
 def input(key):
-    for b in bs:
+    global bs
+    for b in bs[:]:
         if b.hovered:
             if key == 'left mouse down':
+                if mouse.normal is None:
+                    print('No valid mouse.normal, placing above')
+                    offset = Vec3(0,1,0)
+                else:
+                    offset = mouse.normal
                 new = Button(
                     model='cube',
-                    position=b.position + mouse.normal,
+                    position=b.position + offset,
                     color=color.white, 
                     texture='grass.png',
                     parent=scene,
@@ -43,5 +49,7 @@ def input(key):
             if key == 'right mouse down':
                 bs.remove(b)
                 destroy(b)
+
+
 
 app.run()
